@@ -7,7 +7,7 @@ from fastapi import FastAPI
 bucket_addr = os.environ["S3_BUCKET_ADDR"]
 
 # Get json file from object storage
-def get_s3_file:
+def get_s3_file():
     response_API = requests.get(bucket_addr)
     data = response_API.json
     return data
