@@ -8,7 +8,7 @@ pip3 install "fastapi[all]"
 #sudo apt -y install uvicorn
 #cd /home/ubuntu/
 #git clone https://github.com/Danielcourvoisier/cloudsys-lab1-server.git
-#export S3_BUCKET_ADRR=https://sos-ch-dk-2.exo.io/cloudsys-lab1/test.json
+#export S3_BUCKET_ADR=https://sos-ch-dk-2.exo.io/cloudsys-lab1/test.json
 
 # Run Client
 cd /home/ubuntu/cloudsys-lab1-server/

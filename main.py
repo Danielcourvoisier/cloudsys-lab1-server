@@ -4,11 +4,11 @@ import json
 from fastapi import FastAPI
 
 # Get bucket name from env variable
-bucket_addr = os.environ["S3_BUCKET_ADDR"]
+bucket_adr = os.environ["S3_BUCKET_ADR"]
 
 # Get json file from object storage
 def get_s3_file():
-    response_API = requests.get(bucket_addr)
+    response_API = requests.get(bucket_adr)
     data = response_API.json
     return data
 
