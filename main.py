@@ -9,7 +9,8 @@ bucket_adr = os.environ["S3_BUCKET_ADR"]
 # Get json file from object storage
 def get_s3_file():
     response_API = requests.get(bucket_adr)
-    data = response_API.json
+    data = response_API.text
+    data = json.loads(data)
     return data
 
 
