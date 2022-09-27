@@ -17,7 +17,9 @@ app = FastAPI()
 
 @app.get("/")
 async def root():
-    return get_s3_file()
+    data = get_s3_file()
+    print(data)
+    return data
 
 
 @app.get("/hello/{name}")
