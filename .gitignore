@@ -155,3 +155,4 @@ venv/
 bin/
 lib/
 *.cfg
+.idea/
