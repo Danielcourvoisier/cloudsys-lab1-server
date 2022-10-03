@@ -3,7 +3,7 @@ import requests
 import json
 from fastapi import FastAPI
 from fastapi.responses import HTMLResponse
-
+from starlette.responses import FileResponse
 import socket
 
 # Get bucket name from env variable
@@ -34,6 +34,7 @@ app = FastAPI()
 # root
 @app.get("/", response_class=HTMLResponse)
 async def root():
+    #return FileResponse('index.html')
     return """
     <html>
         <head>
@@ -42,14 +43,19 @@ async def root():
         <body>
             <h1>Hey, you are on my server!</h1>
             <p>
+            window.location.href
             My IP Address is: {ip}
             <p>
             This server get data from: 
             <a href="{bucket_url}">{bucket_url}</a>
             <p>
             And you can get this data here:
-            <a href="http://{ip}:{port}/data">http://{ip}:{port}/data</a>
+            <a id="data_link" href=""> Get the data </a>
             <p>
+            <script>
+                data_url = window.location.href + "data";
+                document.getElementById("data_link").href = data_url;
+            </script>
         </body>
     </html>
     """.format(ip=get_ip_address(), bucket_url=bucket_url, port=app_port)
