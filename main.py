@@ -9,18 +9,9 @@ import socket
 # Get bucket name from env variable
 bucket_url = os.environ["BUCKET_URL"]
 app_port = os.environ["APP_PORT"]
-#bucket_url = "https://sos-ch-gva-2.exo.io/cloudsys-lab1-bucket/test.json"
-#app_port = 8000
 
 
-# Get host ip_adress
-def get_ip_address():
-    hostname = socket.gethostname()
-    ip_address = socket.gethostbyname(hostname)
-    return ip_address
-
-
-# Get json file from object storage
+# Get the json file from object storage (bucket)
 def get_s3_file():
     response_API = requests.get(bucket_url)
     data = response_API.text
@@ -34,7 +25,6 @@ app = FastAPI()
 # root
 @app.get("/", response_class=HTMLResponse)
 async def root():
-    #return FileResponse('index.html')
     return """
     <html>
         <head>
@@ -43,8 +33,7 @@ async def root():
         <body>
             <h1>Hey, you are on my server!</h1>
             <p>
-            window.location.href
-            My IP Address is: {ip}
+            My address: <a id="server_url" href=""> </a>
             <p>
             This server get data from: 
             <a href="{bucket_url}">{bucket_url}</a>
@@ -53,12 +42,15 @@ async def root():
             <a id="data_link" href=""> Get the data </a>
             <p>
             <script>
-                data_url = window.location.href + "data";
+                url = window.location.href;
+                data_url = url + "data";
+                document.getElementById("server_url").innerHTML = url;
+                document.getElementById("server_url").href = url
                 document.getElementById("data_link").href = data_url;
             </script>
         </body>
     </html>
-    """.format(ip=get_ip_address(), bucket_url=bucket_url, port=app_port)
+    """.format(bucket_url=bucket_url)
 
 
 # Get json file/data stored on s3/bucket
